@@ -15,6 +15,7 @@ install.packages("arules")
 install.packages("paf")
 install.packages("mnormt")
 install.packages("factoextra")
+install.packages("treemap")
 
 # Importacion de paquetes
 library(arules)
@@ -25,6 +26,7 @@ library("dplyr")
 library(corrplot)
 library(ggplot2)
 library(factoextra)
+library('treemap')
 
 
 # Importar datos
@@ -101,7 +103,27 @@ ggplot(data_training_numeric_clean, aes(x = SalePrice, y = GarageArea)) +
 
 
 # --------------- Analisis exploratorio - Variables categoricas ---------------
-#poner lo de luis aqui
+
+# Graficos de barras
+barplot(table(train$MSSubClass), ylim=c(0,600))
+barplot(table(train$YrSold), ylim=c(0,350))
+barplot(table(train$MoSold), ylim=c(0,300))
+barplot(table(train$OverallQual), ylim=c(0,500))
+
+# Graficos de pie
+pie(table(train$Alley), labels = c("Gravel","Pavement"))
+pie(table(train$BsmtQual),labels=c("Excelent","Fair","Good","Average/Typical"))
+pie(table(train$BldgType),labels = c("Single-Family detatched","Two-family Conversion","Duplex","Townhouse Inside Unit","Townhouse End Unit"))
+pie(table(train$HeatingQC), labels = c("Excelent","Fair","Good","Poor","Average/Typical"))
+
+# Grafico de proporcion
+treemap(as.data.frame(table(train$Neighborhood)),index=c("Var1"),vSize = c("Freq"))
+
+# Tablas de frecuencia
+table(train$Utilities)
+table(train$LotConfig)
+table(train$Heating)
+table(train$GarageType)
 
 
 # --------------- Analisis de componentes ---------------
